@@ -1,5 +1,5 @@
 pcall(function(...)
---1
+--2
 ---@diagnostic disable-next-line: deprecated
 function Nothing() end
 _G.SecureMethod = "NoSecure"
@@ -3159,16 +3159,14 @@ local UserInputService = game:GetService("UserInputService")
 local cd = false
 gui["Hooks"][#gui["Hooks"]+1] = UserInputService.InputBegan:Connect(function(input, _gameProcessed)
 	if input.KeyCode == Enum.KeyCode.Insert and not cd then
+        print("МИНЮ ВКЛЮЧИНО СУКА НАХУЙ")
         cd = true
 		gui.objs["MainFrame"].Visible = not gui.objs["MainFrame"].Visible
         gui.objs["AntiMissclick"].Size = ((gui.objs["MainFrame"].Visible and UDim2.fromScale(1,1)) or UDim2.fromScale(0,0))
-	end
-end)
-
-gui["Hooks"][#gui["Hooks"]+1] = UserInputService.InputEnded:Connect(function(input, _gameProcessed)
-	if input.KeyCode == Enum.KeyCode.Insert then
+    elseif input.KeyCode == Enum.KeyCode.Insert then
+        print("МЕНЮ АТКЛЮЧИНО БЛЯТЬ")
         cd = false
-	end
+    end
 end)
 
 local dwCamera = game:GetService("Workspace").CurrentCamera
