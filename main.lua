@@ -1,6 +1,5 @@
-pcall(function (...)
-    
-
+pcall(function(...)
+--1
 ---@diagnostic disable-next-line: deprecated
 function Nothing() end
 _G.SecureMethod = "NoSecure"
