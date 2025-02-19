@@ -1,5 +1,5 @@
 pcall(function(...)
---2
+--3
 ---@diagnostic disable-next-line: deprecated
 function Nothing() end
 _G.SecureMethod = "NoSecure"
@@ -3158,7 +3158,10 @@ end
 local UserInputService = game:GetService("UserInputService")
 local cd = false
 gui["Hooks"][#gui["Hooks"]+1] = UserInputService.InputBegan:Connect(function(input, _gameProcessed)
-	if input.KeyCode == Enum.KeyCode.Insert and not cd then
+	if input.KeyCode == Enum.KeyCode.Insert then
+        print("ИНСЕРТ ЗАМЕЧЕН НАХУЙ ВСЁ РАБОТАЕТ ИДИ НАХУЙ")
+    end
+    if input.KeyCode == Enum.KeyCode.Insert and not cd then
         print("МИНЮ ВКЛЮЧИНО СУКА НАХУЙ")
         cd = true
 		gui.objs["MainFrame"].Visible = not gui.objs["MainFrame"].Visible
