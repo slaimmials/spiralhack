@@ -1,5 +1,5 @@
 pcall(function(...)
---3
+
 ---@diagnostic disable-next-line: deprecated
 function Nothing() end
 _G.SecureMethod = "NoSecure"
@@ -2719,7 +2719,7 @@ gui["Hooks"][#gui["Hooks"]+1] = game:GetService("RunService").RenderStepped:Conn
     --RLChams.Enabled = gui:IsChecked("Visuals", "Real chams", 3)
     if gui:IsChecked("Visuals", "Chams", 3) then
         for _,part in pairs(lplr.Character:GetChildren()) do
-            if (part:IsA("BasePart") or part.ClassName == "MeshPart") and part.Name ~= "HumanoidRootPart" and part.Transparency == 0 then
+            if (part:IsA("BasePart") or part.ClassName == "MeshPart") and part.Name ~= "HumanoidRootPart" and part.Name ~= "Root" and part.Transparency == 0 then
                 transparenced[part.Name] = part.Transparency
                 part.Transparency = 0.999
                 if part.Name:find("Head") and part:FindFirstChild("face") then
@@ -2911,12 +2911,12 @@ function Setvisuals(v)
                 local success, fsdf = pcall(function()
                     if not char then return true; end
                     local camera = game:GetService("Workspace").CurrentCamera
-                    local primarypart = char.HumanoidRootPart or char.PrimaryPart
+                    local primarypart = char.HumanoidRootPart or char.Root or char.PrimaryPart
                     local vector, onScreen = camera:WorldToViewportPoint(primarypart.Position+Vector3.new(0,4,0))
                     local destinationSnap, onScreenSnap = camera:WorldToViewportPoint(primarypart.Position)
 
                     if gui:IsChecked("Visuals", "Offscreen pointers") then
-                        if not onScreenSnap and primarypart ~= nil and lplr.Character.HumanoidRootPart ~= nil then
+                        if not onScreenSnap and primarypart ~= nil then
                             snapLine.Visible = true
                             local screenX2 = math.floor(gui.objs["Gui"].AbsoluteSize.X/2)
                             local screenY2 = math.floor(gui.objs["Gui"].AbsoluteSize.Y/2)
@@ -2927,7 +2927,7 @@ function Setvisuals(v)
                             local y = (math.sin(angle) * 50) * (destinationSnap.Z < 0 and -1 or 1)
                             snapLine.Rotation = destinationSnap.Z < 0 and math.deg(angle)-180 or math.deg(angle)
                             snapLine.Position = UDim2.new(0.5, -x, 0.5, -y)
-                            snapTitle.Text =  math.floor((primarypart.Position - lplr.Character.HumanoidRootPart.Position).Magnitude)
+                            snapTitle.Text =  math.floor((primarypart.Position - (lplr.Character.HumanoidRootPart.Position or lplr.Character.Root.Position)).Magnitude)
                         else
                             snapLine.Visible = false
                         end
@@ -3044,11 +3044,11 @@ function Setvisuals(v)
                             Nametag.Color = InterColor
                             Nametag.Visible = true
                             local dist = 0
-                            dist = math.floor((primarypart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
+                            dist = math.floor((primarypart.Position - (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position or game:GetService("Players").LocalPlayer.Character.Root.Position)).Magnitude)
                             Nametag.Text = plr .. "[" .. dist .. "m]"
                         elseif not gui:IsChecked("Visuals", "Nametags",2) and gui:IsChecked("Visuals", "Distance", 2) and gui:IsChecked("Visuals", "Enabled") then
                             local dist = 0
-                            dist = math.floor((primarypart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
+                            dist = math.floor((primarypart.Position - (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position or game:GetService("Players").LocalPlayer.Character.Root.Position)).Magnitude)
                             Nametag.Text = "  [" .. dist .. "m]"
                         else
                             Nametag.Visible = false
