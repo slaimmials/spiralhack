@@ -727,3 +727,4 @@ end
 if gui:Modal("Пащёл нахой", "ОК", "ОК") then
     
 end
+	end)
